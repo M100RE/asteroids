@@ -5,6 +5,6 @@
 class asteroid : entity
 {
 private:
-public:
+public: 
     void split();
 };

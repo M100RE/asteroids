@@ -33,7 +33,7 @@ void input_handler(GLFWwindow* window, player& space_ship)
     }
     if(shooting && glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
     {
-        shooting = true;
+        shooting = false;
         space_ship.shoot();
     }
 }

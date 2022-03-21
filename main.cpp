@@ -6,17 +6,8 @@
 int window_height = 800;
 int window_width = 800;
 
-const float player_size = 0.04;
-
 bool shooting = true;
 int cooldown = 0;
-
-float player_vertices[] =
-{
-    -player_size, -player_size, 
-     player_size,  0.0f,
-    -player_size,  player_size 
-};
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -61,7 +52,7 @@ int main()
     gladLoadGL();
     glViewport(0, 0, window_width, window_height);
 
-    player space_ship(0.0005, player_vertices, sizeof(player_vertices), nullptr, 0, "shaders/vertex.shader", "shaders/fragment.shader");
+    player space_ship(0.0005);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 

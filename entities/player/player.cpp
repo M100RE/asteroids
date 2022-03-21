@@ -3,8 +3,17 @@
 
 #include <iostream>
 
-player::player(float acceleration, float* vertices, int size_vertices, unsigned int* indices, int size_indices, const char* vertex_path, const char* fragment_path)
-    : entity(vertices, size_vertices, indices, size_indices, vertex_path, fragment_path),
+const float player_size = 0.04;
+
+float vertices[] = 
+{
+    -player_size, -player_size,
+     player_size,  0.0f,
+    -player_size,  player_size
+};
+
+player::player(float acceleration)
+    : entity(vertices, sizeof(vertices), nullptr, 0, "shaders/vertex.shader", "shaders/fragment.shader"),
     acceleration(acceleration)
 {}
 

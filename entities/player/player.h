@@ -16,7 +16,7 @@ private:
     float speed_x_mouse_direction();
     float speed_y_mouse_direction();
 public:
-    player(float acceleration, float* vertices, int size_vertices, unsigned int* indices, int size_indices, const char* vertex_path, const char* fragment_path);
+    player(float acceleration);
     void accelerate();
     void define_degree(float degree);
     void add_degree(float addition);

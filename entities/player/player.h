@@ -11,6 +11,7 @@ private:
     float mouse_degree;
 
     std::vector<entity*> bullets;
+    std::vector<int> bullet_despawn_time;
 
     float mouse_degree_relative_player(GLFWwindow* window, int window_width, int window_height);
     float speed_x_mouse_direction();

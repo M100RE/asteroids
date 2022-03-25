@@ -4,6 +4,8 @@
 #include <iostream>
 
 const float player_size = 0.04;
+const float despawn_time_bullets = 100;
+const float speed_bullets = 50;
 
 float vertices[] = 
 {
@@ -69,12 +71,21 @@ void player::update(GLFWwindow* window, int window_width, int window_height)
 
     for(int i = 0; i < bullets.size(); i++)
     {
+        bullet_despawn_time[i]++;
+
         bullets[i]->add_move_speed();
         bullets[i]->update(window, window_width, window_height);
-        if(bullets[i]->receive_pos_x() > 1 || bullets[i]->receive_pos_x() < -1 || bullets[i]->receive_pos_y() < -1 || bullets[i]->receive_pos_y() > 1)
+
+        if(bullets[i]->receive_pos_x() > 1 || bullets[i]->receive_pos_x() < -1)
+            bullets[i]->move(bullets[i]->receive_pos_x() * -1, bullets[i]->receive_pos_y() * -1);
+        if(bullets[i]->receive_pos_y() < -1 || bullets[i]->receive_pos_y() > 1)
+            bullets[i]->move(bullets[i]->receive_pos_x(), bullets[i]->receive_pos_y() * -1);
+
+        if(bullet_despawn_time[i] > despawn_time_bullets)
         {
             delete bullets[i];
             bullets.erase(bullets.begin() + i);
+            bullet_despawn_time.erase(bullet_despawn_time.begin() + i);
         }
     }
 }
@@ -96,11 +107,12 @@ void player::shoot()
 
     entity* bullet = new entity(bullet_vertices, sizeof(bullet_vertices), bullet_indices, sizeof(bullet_indices), "shaders/vertex.shader", "shaders/fragment.shader");
 
-    bullet->define_speed_x((abs(speed_x) + acceleration * 50) * speed_x_mouse_direction());
-    bullet->define_speed_y((abs(speed_y) + acceleration * 50) * speed_y_mouse_direction());
+    bullet->define_speed_x((abs(speed_x) + acceleration * speed_bullets) * speed_x_mouse_direction());
+    bullet->define_speed_y((abs(speed_y) + acceleration * speed_bullets) * speed_y_mouse_direction());
     
     bullet->rotate(mouse_degree);
     bullet->move(pos_x + 0.04 * speed_x_mouse_direction(), pos_y + 0.04 * speed_y_mouse_direction());
 
     bullets.push_back(bullet);
+    bullet_despawn_time.push_back(0);
 }

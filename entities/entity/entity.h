@@ -19,6 +19,7 @@ public:
     void add_move_speed();
     void define_speed_x(float speed);
     void define_speed_y(float speed);
+    void scale(float scale_x, float scale_y);
     float receive_pos_x() const;
     float receive_pos_y() const;
     virtual void update(GLFWwindow* window, int window_width, int window_height);

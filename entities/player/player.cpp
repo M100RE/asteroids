@@ -76,10 +76,10 @@ void player::shoot()
 {
     float bullet_vertices[] = 
     {
-        -0.02f, -0.01f,
-         0.02f, -0.01f,
-         0.02f,  0.01f,
-        -0.02f,  0.01f
+        -0.01f, -0.01f,
+         0.01f, -0.01f,
+         0.01f,  0.01f,
+        -0.01f,  0.01f
     };
     unsigned int bullet_indices[] = 
     {

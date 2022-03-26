@@ -6,7 +6,9 @@
 player::player(float acceleration, float* vertices, int size_vertices, unsigned int* indices, int size_indices, const char* vertex_path, const char* fragment_path)
     : entity(vertices, size_vertices, indices, size_indices, vertex_path, fragment_path),
     acceleration(acceleration)
-{}
+{
+    scale(1, 1);
+}
 
 
 float player::mouse_degree_relative_player(GLFWwindow* window, int window_width, int window_height)
@@ -86,6 +88,7 @@ void player::shoot()
     }; 
 
     entity* bullet = new entity(bullet_vertices, sizeof(bullet_vertices), bullet_indices, sizeof(bullet_indices), "shaders/vertex.shader", "shaders/fragment.shader");
+    bullet->scale(1, 1);
 
     bullet->define_speed_x((abs(speed_x) + acceleration * 50) * speed_x_mouse_direction());
     bullet->define_speed_y((abs(speed_y) + acceleration * 50) * speed_y_mouse_direction());

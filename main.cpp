@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include "entities/player/player.h"
+#include "entities/asteroid/asteroid.h"
 
 int window_height = 800;
 int window_width = 800;
@@ -62,15 +63,20 @@ int main()
     glViewport(0, 0, window_width, window_height);
 
     player space_ship(0.0005, player_vertices, sizeof(player_vertices), nullptr, 0, "shaders/vertex.shader", "shaders/fragment.shader");
+    asteroid f = asteroid(0.007, 0.007, 1, 0);
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+    int counter = 0;
+
     while(!glfwWindowShouldClose(window))
     {
+        counter++;
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
         space_ship.update(window, window_width, window_height);
+        f.update(window, window_width, window_height);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

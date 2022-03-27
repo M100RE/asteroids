@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../../rendering/shape/shape.h"
 #include <GLFW/glfw3.h>
 

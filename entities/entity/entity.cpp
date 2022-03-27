@@ -1,5 +1,4 @@
 #include "entity.h"
-#include <iostream>
 
 entity::entity(float* vertices, int size_vertices, unsigned int* indices, int size_indices, const char* vertex_path, const char* fragment_path)
     : body(vertices, size_vertices, indices, size_indices, vertex_path, fragment_path),
@@ -44,7 +43,6 @@ void entity::define_speed_y(float speed)
 
 void entity::scale(float scale_x, float scale_y)
 {
-    std::cout << "hey\n";
     body.receive_shader().uniform2f("scale", scale_x, scale_y); 
 }
 

@@ -1,4 +1,5 @@
 #include "asteroid.h"
+#include <iostream>
 
 float vertices[] = 
 {
@@ -14,9 +15,10 @@ unsigned int indices[] =
     0, 2, 3
 };
 
-asteroid::asteroid(float speed_x, float speed_y, float size, int stage)
+asteroid::asteroid(float speed_x, float speed_y, float pos_x, float pos_y, float size, int stage)
     : entity(vertices, sizeof(vertices), indices, sizeof(indices), "shaders/vertex.shader", "shaders/fragment.shader")
 {
+    move(pos_x, pos_y);
     scale(size, size);
     define_speed_x(speed_x);
     define_speed_y(speed_y);
@@ -31,12 +33,12 @@ void asteroid::split()
 {
     if(!splitted)
     {
-        asteroid* splitter_1 = new asteroid(speed_x + speed_x * 0.5, speed_y, 0.5, 1);
-        asteroid* splitter_2 = new asteroid(speed_x, speed_y + speed_y * 0.5, 0.5, 1);
-        splitter_1->move(pos_x, pos_y);
-        splitter_2->move(pos_x, pos_y);
+        asteroid* splitter_1 = new asteroid(speed_x + speed_x * 0.5, speed_y, pos_x, pos_y, 0.5, 1);
+        asteroid* splitter_2 = new asteroid(speed_x, speed_y + speed_y * 0.5, pos_x, pos_y, 0.5, 1);
+
         splitters.push_back(splitter_1);
         splitters.push_back(splitter_2);
+
         splitted = true;
     }
 }
@@ -63,4 +65,5 @@ void asteroid::destruct()
         delete splitters[i];
     }
     splitters.clear();
+    std::cout << "f\n";
 }

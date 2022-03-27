@@ -1,7 +1,7 @@
 #include "asteroid.h"
 #include <iostream>
 
-float vertices[] = 
+float asteroid_vertices[] = 
 {
     -0.1f, -0.1f,
      0.1f, -0.1f,
@@ -16,7 +16,7 @@ unsigned int indices[] =
 };
 
 asteroid::asteroid(float speed_x, float speed_y, float pos_x, float pos_y, float size, int stage)
-    : entity(vertices, sizeof(vertices), indices, sizeof(indices), "shaders/vertex.shader", "shaders/fragment.shader")
+    : entity(asteroid_vertices, sizeof(asteroid_vertices), indices, sizeof(indices), "shaders/vertex.shader", "shaders/fragment.shader")
 {
     move(pos_x, pos_y);
     scale(size, size);

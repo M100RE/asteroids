@@ -85,16 +85,22 @@ int main()
             bool x_y = rand() % 2 == 0;
             float x = (x_y) ? (float)rand() / RAND_MAX * 2 - 1 : (rand() % 2 == 0) ? -1 : 1;
             float y = (!x_y) ? (float)rand() / RAND_MAX * 2 - 1 : (rand() % 2 == 0) ? -1 : 1;
-            asteroids.push_back(new asteroid(((float)rand() / RAND_MAX * 2 - 1) / 100, ((float)rand() / RAND_MAX * 2 - 1) / 100, x, y, 1, 0));
+            asteroids.push_back(new asteroid(((float)rand() / RAND_MAX * 2 - 1) / 100, ((float)rand() / RAND_MAX * 2 - 1) / 100, x, y, 1, 0, 0));
         }
         for(int i = 0; i < asteroids.size(); i++)
         {
+            bool out = asteroids[i]->out_of_bounds(1.2, 1.2);
+            std::cout << out << "\n";
             asteroids[i]->update(window, window_width, window_height);
-           if(asteroids[i]->receive_pos_x() > 1.2 || asteroids[i]->receive_pos_y() > 1.2 || asteroids[i]->receive_pos_x() < -1.2 || asteroids[i]->receive_pos_y() < -1.2)
+            if(out)
             {
                 asteroids[i]->destruct();
                 delete asteroids[i];
                 asteroids.erase(asteroids.begin() + i);
+            }
+            else
+            {
+                asteroids[i]->check_all_collisions(space_ship.receive_bullets());
             }
         }
 
@@ -103,7 +109,7 @@ int main()
 
         input_handler(window, space_ship);
 
-        if(cooldown >= 10)
+        if(cooldown >= 50)
         {
             shooting = true;
             cooldown = 0;

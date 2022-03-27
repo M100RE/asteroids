@@ -119,3 +119,8 @@ void player::shoot()
     bullets.push_back(bullet);
     bullet_despawn_time.push_back(0);
 }
+
+std::vector<entity*> player::receive_bullets() const 
+{
+    return bullets;
+}

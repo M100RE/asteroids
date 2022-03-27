@@ -23,4 +23,5 @@ public:
     void add_degree(float addition);
     void update (GLFWwindow* window, int window_width, int window_height) override;
     void shoot();
+    std::vector<entity*> receive_bullets() const;
 };

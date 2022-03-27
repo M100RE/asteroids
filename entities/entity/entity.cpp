@@ -41,6 +41,11 @@ void entity::define_speed_y(float speed)
     speed_y = speed;
 }
 
+void entity::scale(float scale_x, float scale_y)
+{
+    body.receive_shader().uniform2f("scale", scale_x, scale_y); 
+}
+
 float entity::receive_pos_x() const
 {
     return pos_x;

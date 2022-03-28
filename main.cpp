@@ -2,8 +2,8 @@
 #include <random>
 
 #include <glad/glad.h>
-#include "entities/player/player.h"
-#include "entities/asteroid/asteroid.h"
+#include "entities/player.h"
+#include "entities/asteroid.h"
 
 int window_height = 800;
 int window_width = 800;
@@ -83,14 +83,17 @@ int main()
         for(int i = size; i < asteroids_in_frame - size; i++)
         {
             bool x_y = rand() % 2 == 0;
-            float x = (x_y) ? (float)rand() / RAND_MAX * 2 - 1 : (rand() % 2 == 0) ? -1 : 1;
-            float y = (!x_y) ? (float)rand() / RAND_MAX * 2 - 1 : (rand() % 2 == 0) ? -1 : 1;
-            asteroids.push_back(new asteroid(((float)rand() / RAND_MAX * 2 - 1) / 100, ((float)rand() / RAND_MAX * 2 - 1) / 100, x, y, 1, 0, 0));
+            int right_left1 = (rand() % 2 == 0) ? -1 : 1;
+            int right_left2 = (rand() % 2 == 0) ? -1 : 1;
+            float x = (x_y) ? (float)rand() / RAND_MAX * 2 : right_left1;
+            float y = (!x_y) ? (float)rand() / RAND_MAX * 2 : right_left2;
+            float speed_x = ((float)rand() / RAND_MAX - ((right_left1) ? 1 : 0)) / 100;
+            float speed_y = ((float)rand() / RAND_MAX - ((!right_left2) ? 1 : 0)) / 100;
+            asteroids.push_back(new asteroid(speed_x, speed_y, x, y, 1, 0, 0));
         }
         for(int i = 0; i < asteroids.size(); i++)
         {
             bool out = asteroids[i]->out_of_bounds(1.2, 1.2);
-            std::cout << out << "\n";
             asteroids[i]->update(window, window_width, window_height);
             if(out)
             {

@@ -1,2 +1,5 @@
 .main
-rendering/textures/stb_image
+include/rendering/textures/stb_image
+src/rendering/textures/stb_image
+
+build
